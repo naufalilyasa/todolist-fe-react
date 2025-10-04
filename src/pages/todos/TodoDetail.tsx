@@ -126,14 +126,14 @@ const TodoDetail = () => {
         background: "#f5f5f5",
       }}
     >
-      <Content style={{ padding: "20px 300px" }}>
+      <Content style={{ padding: "16px 10%" }}>
         {/* Back Button */}
         <Button
           type="text"
           icon={<ArrowLeftOutlined />}
           onClick={() => navigate("/")}
-          style={{ marginBottom: 24 }}
-          size="large"
+          style={{ marginBottom: 16 }}
+          size="middle"
         >
           Back to Tasks
         </Button>
@@ -150,30 +150,31 @@ const TodoDetail = () => {
                 gap: 16,
               }}
             >
-              <div style={{ flex: 1, minWidth: 300 }}>
-                <Space align="start" size="middle">
+              <div style={{ flex: 1, minWidth: 200 }}>
+                <Space align="start" size="middle" wrap>
                   <Button
                     type="text"
                     onClick={handleToggleComplete}
                     icon={
                       todo.is_completed ? (
                         <CheckCircleOutlined
-                          style={{ fontSize: 32, color: "#52c41a" }}
+                          style={{ fontSize: 28, color: "#52c41a" }}
                         />
                       ) : (
                         <CloseCircleOutlined
-                          style={{ fontSize: 32, color: "#d9d9d9" }}
+                          style={{ fontSize: 28, color: "#d9d9d9" }}
                         />
                       )
                     }
                     style={{ padding: 0, height: "auto" }}
                   />
-                  <div>
+                  <div style={{ minWidth: 0 }}>
                     <Title
-                      level={2}
+                      level={4}
                       style={{
                         margin: 0,
-                        marginBottom: 12,
+                        marginBottom: 8,
+                        fontSize: 18,
                         textDecoration: todo.is_completed
                           ? "line-through"
                           : "none",
@@ -182,7 +183,7 @@ const TodoDetail = () => {
                     >
                       {todo.title}
                     </Title>
-                    <Space wrap>
+                    <Space wrap size={8}>
                       <Tag color={getPriorityColor(todo.priority)}>
                         {todo.priority} Priority
                       </Tag>
@@ -194,14 +195,20 @@ const TodoDetail = () => {
                   </div>
                 </Space>
               </div>
-              <Space>
+              <Space wrap>
                 <Button
                   icon={<EditOutlined />}
+                  size="large"
                   onClick={() => setIsEditModalOpen(true)}
                 >
                   Edit
                 </Button>
-                <Button danger icon={<DeleteOutlined />} onClick={handleDelete}>
+                <Button
+                  danger
+                  icon={<DeleteOutlined />}
+                  size="large"
+                  onClick={handleDelete}
+                >
                   Delete
                 </Button>
               </Space>
@@ -209,10 +216,10 @@ const TodoDetail = () => {
 
             {/* Description */}
             <div>
-              <Title level={4}>Description</Title>
+              <Title level={5}>Description</Title>
               <Paragraph
                 style={{
-                  fontSize: 16,
+                  fontSize: 14,
                   color: todo.is_completed ? "#8c8c8c" : "inherit",
                 }}
               >
@@ -222,8 +229,8 @@ const TodoDetail = () => {
 
             {/* Task Details */}
             <div>
-              <Title level={4}>Task Details</Title>
-              <Descriptions bordered column={1} size="middle">
+              <Title level={5}>Task Details</Title>
+              <Descriptions bordered column={1} size="small">
                 <Descriptions.Item label="Task ID">{todo.id}</Descriptions.Item>
                 <Descriptions.Item label="Status">
                   <Tag color={todo.is_completed ? "green" : "orange"}>
@@ -236,7 +243,7 @@ const TodoDetail = () => {
                   </Tag>
                 </Descriptions.Item>
                 <Descriptions.Item label="Category">
-                  <Tag color={todo.category.color}>
+                  <Tag color={todo.category?.color || "blue"}>
                     {todo.category?.name || "Uncategorized"}
                   </Tag>
                 </Descriptions.Item>

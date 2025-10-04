@@ -111,7 +111,7 @@ const TodoTable = ({
           onChange={() =>
             handleToggleComplete({
               todoId: record.id,
-              data: { is_completed: record.is_completed },
+              data: { is_completed: !record.is_completed },
             })
           }
         />
